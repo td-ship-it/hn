@@ -32,5 +32,11 @@ Có thể gắn tên miền riêng trong Cloudflare Dashboard → Workers → di
 Điền cột **Số điện thoại** và cột **Email** (cột Email được tạo sau khi chạy `setup`) cho từng người.
 Cột **Link tài liệu**: dòng nào để trống sẽ dùng chung link đầu tiên trong cột.
 
+## Triển khai qua GitHub (Cloudflare Workers Builds)
+Repo `td-ship-it/hn`: đưa toàn bộ nội dung thư mục này lên **gốc repo** (wrangler.toml nằm ở gốc).
+Tên Worker trong `wrangler.toml` phải trùng tên Worker trên Cloudflare (`hn`).
+Cloudflare → Workers & Pages → hn → Settings → Build: Deploy command `npx wrangler deploy`.
+Settings → Variables and Secrets: thêm 3 secret `ADMIN_PASSWORD`, `GAS_URL`, `GAS_SECRET` (kiểu Secret).
+
 ## Dùng kiosk
 Mở `/` trên máy kiosk, bấm "Toàn màn hình". Sau mỗi lượt, màn hình tự về trạng thái nhập sau vài giây.

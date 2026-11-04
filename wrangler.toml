@@ -1,4 +1,4 @@
-name = "diemdanh-hoinghi-vcnld"
+name = "hn"
 main = "src/worker.js"
 compatibility_date = "2025-01-01"
 
