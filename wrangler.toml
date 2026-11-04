@@ -1,0 +1,13 @@
+name = "diemdanh-hoinghi-vcnld"
+main = "src/worker.js"
+compatibility_date = "2025-01-01"
+
+# Giao diện tĩnh: / (kiosk) và /admin
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# Secrets (đặt bằng: npx wrangler secret put <TÊN>)
+#   ADMIN_PASSWORD  mật khẩu đăng nhập admin
+#   GAS_URL         URL web app Apps Script (kết thúc bằng /exec)
+#   GAS_SECRET      trùng với API_SECRET trong Code.gs

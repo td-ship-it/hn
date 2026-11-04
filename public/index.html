@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="robots" content="noindex">
+<title>Điểm danh Hội nghị VC-NLĐ Trường Dược 2026</title>
+<style>
+  :root{
+    --bg:#0b3d39; --bg2:#0f5a53; --card:#ffffff; --ink:#10201d; --muted:#5b6f6a; --line:#d5e2de;
+    --brand:#0f766e; --brand-d:#0b5a54; --key:#f1f6f5; --keyh:#e1ece9;
+    --ok:#15803d; --okbg:#e6f6ec; --warn:#b45309; --warnbg:#fdf0dc; --bad:#b91c1c; --badbg:#fde8e8;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;margin:0}
+  body{
+    font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);
+    background:radial-gradient(1200px 700px at 15% 0%,var(--bg2),var(--bg));
+    user-select:none;-webkit-user-select:none;touch-action:manipulation;overflow:hidden;
+  }
+  button{font:inherit;cursor:pointer;border:0}
+  .app{height:100%;display:grid;grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:0;padding:max(14px,env(safe-area-inset-top)) 16px 16px}
+
+  /* khu thông tin */
+  .info{color:#fff;text-align:center;padding:6px 8px 10px}
+  .badge{display:inline-block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#8ff0e3}
+  h1{margin:6px 0 4px;font-size:clamp(20px,3.2vw,40px);line-height:1.25}
+  .hint{margin:0;color:#cfeee9;font-size:clamp(14px,1.6vw,20px)}
+  .clock{margin-top:10px;font-variant-numeric:tabular-nums;font-size:clamp(14px,1.5vw,18px);color:#a9dbd4}
+
+  /* khu nhập */
+  .pad{
+    align-self:center;justify-self:center;width:min(100%,460px);background:var(--card);border-radius:24px;
+    padding:18px;box-shadow:0 20px 60px rgba(0,0,0,.35);
+  }
+  .display{
+    min-height:78px;display:flex;align-items:center;justify-content:center;border-radius:16px;
+    background:var(--key);border:2px solid var(--line);font-size:clamp(32px,6vw,46px);font-weight:700;
+    letter-spacing:.06em;font-variant-numeric:tabular-nums;padding:0 12px;
+  }
+  .display.empty{color:#9bb0ab;font-weight:500;font-size:clamp(18px,3.5vw,24px);letter-spacing:0}
+  .display.shake{animation:shake .4s}
+  @keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+  .keys{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+  .key{
+    height:clamp(60px,10.5vh,84px);border-radius:16px;background:var(--key);color:var(--ink);
+    font-size:clamp(26px,4.6vw,36px);font-weight:600;transition:background .08s,transform .08s;
+  }
+  .key:active{background:var(--keyh);transform:scale(.96)}
+  .key.fn{font-size:clamp(16px,2.6vw,20px);color:var(--muted)}
+  .go{
+    width:100%;margin-top:12px;height:clamp(62px,10vh,78px);border-radius:16px;background:var(--brand);color:#fff;
+    font-size:clamp(20px,3.4vw,26px);font-weight:700;letter-spacing:.02em;
+  }
+  .go:active{background:var(--brand-d)} .go:disabled{opacity:.45}
+  .tiny{margin:10px 0 0;text-align:center;color:var(--muted);font-size:13px;min-height:18px}
+
+  /* bố cục ngang cho màn hình kiosk lớn */
+  @media (min-width:900px) and (min-height:560px){
+    .app{grid-template-columns:1.1fr 1fr;grid-template-rows:1fr;gap:40px;padding:32px 56px}
+    .info{align-self:center;text-align:left;padding:0}
+    h1{font-size:clamp(34px,3.6vw,56px)}
+    .pad{width:min(100%,500px);justify-self:start}
+  }
+
+  /* kết quả */
+  .ov{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(5,25,23,.78);z-index:10}
+  .ov.on{display:flex}
+  .res{
+    width:min(100%,620px);background:var(--card);border-radius:28px;padding:34px 26px 30px;text-align:center;
+    position:relative;overflow:hidden;animation:pop .22s ease-out;
+  }
+  @keyframes pop{from{transform:scale(.94);opacity:0}to{transform:none;opacity:1}}
+  .icon{width:92px;height:92px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:54px;font-weight:700}
+  .res.ok .icon{background:var(--ok)} .res.warn .icon{background:#d97706} .res.bad .icon{background:var(--bad)}
+  .res h2{margin:0 0 4px;font-size:clamp(22px,4vw,30px)}
+  .who{font-size:clamp(28px,5.4vw,42px);font-weight:800;line-height:1.2;margin:6px 0 2px}
+  .unit{font-size:clamp(16px,2.8vw,22px);color:var(--muted)}
+  .badge2{display:inline-block;margin-top:14px;padding:8px 16px;border-radius:99px;font-weight:700;font-size:clamp(15px,2.4vw,19px)}
+  .res.ok .badge2{background:var(--okbg);color:var(--ok)} .res.warn .badge2{background:var(--warnbg);color:var(--warn)}
+  .res.bad .badge2{background:var(--badbg);color:var(--bad)}
+  .note{margin:14px 0 0;color:var(--muted);font-size:clamp(14px,2.2vw,17px)}
+  .close{margin-top:18px;padding:12px 26px;border-radius:12px;background:var(--key);color:var(--ink);font-weight:600;font-size:16px}
+  .timer{position:absolute;left:0;bottom:0;height:6px;background:var(--brand);width:100%;transform-origin:left}
+  .timer.run{animation:cd linear forwards}
+  @keyframes cd{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+
+  /* điều khiển nhỏ */
+  .corner{position:fixed;right:10px;bottom:8px;display:flex;gap:6px;z-index:5}
+  .corner button,.corner a{background:rgba(255,255,255,.12);color:#cfeee9;font-size:12px;padding:6px 10px;border-radius:8px;text-decoration:none;opacity:.55}
+  .corner button:hover,.corner a:hover{opacity:1}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <section class="info">
+    <span class="badge">Điểm danh tham dự</span>
+    <h1>Hội nghị Viên chức - Người lao động<br>Trường Dược năm 2026</h1>
+    <p class="hint">Thầy/cô vui lòng nhập số điện thoại đã đăng ký để điểm danh</p>
+    <div class="clock" id="clock"></div>
+  </section>
+
+  <section class="pad">
+    <div class="display empty" id="display" aria-live="polite">Nhập số điện thoại</div>
+    <div class="keys" id="keys">
+      <button class="key" data-k="1">1</button><button class="key" data-k="2">2</button><button class="key" data-k="3">3</button>
+      <button class="key" data-k="4">4</button><button class="key" data-k="5">5</button><button class="key" data-k="6">6</button>
+      <button class="key" data-k="7">7</button><button class="key" data-k="8">8</button><button class="key" data-k="9">9</button>
+      <button class="key fn" data-k="clear">Xóa hết</button><button class="key" data-k="0">0</button><button class="key fn" data-k="back" aria-label="Xóa một số">⌫</button>
+    </div>
+    <button class="go" id="go" disabled>ĐIỂM DANH</button>
+    <p class="tiny" id="tiny"></p>
+  </section>
+</div>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true">
+  <div class="res" id="res">
+    <div class="icon" id="icon"></div>
+    <h2 id="title"></h2>
+    <div class="who" id="who"></div>
+    <div class="unit" id="unit"></div>
+    <div class="badge2" id="badge"></div>
+    <p class="note" id="note"></p>
+    <button class="close" id="close">Đóng</button>
+    <div class="timer" id="timer"></div>
+  </div>
+</div>
+
+<div class="corner">
+  <button id="fs" type="button">Toàn màn hình</button>
+  <a href="/admin">Quản trị</a>
+</div>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var MAX = 11, MIN = 9;
+  var digits = '', busy = false, closeTimer = null;
+
+  function fmt(d){
+    if (d.length <= 4) return d;
+    if (d.length <= 7) return d.slice(0,4) + ' ' + d.slice(4);
+    return d.slice(0,4) + ' ' + d.slice(4,7) + ' ' + d.slice(7);
+  }
+  function paint(){
+    var el = $('display');
+    if (digits) { el.textContent = fmt(digits); el.classList.remove('empty'); }
+    else { el.textContent = 'Nhập số điện thoại'; el.classList.add('empty'); }
+    $('go').disabled = busy || digits.length < MIN;
+    $('tiny').textContent = '';
+  }
+  function press(k){
+    if (busy || $('ov').classList.contains('on')) return;
+    if (k === 'clear') digits = '';
+    else if (k === 'back') digits = digits.slice(0,-1);
+    else if (/^\d$/.test(k) && digits.length < MAX) digits += k;
+    paint();
+  }
+  $('keys').addEventListener('click', function(e){
+    var b = e.target.closest('[data-k]'); if (b) press(b.getAttribute('data-k'));
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if ($('ov').classList.contains('on')) { if (e.key === 'Enter' || e.key === 'Escape') closeResult(); return; }
+    if (/^\d$/.test(e.key)) { press(e.key); e.preventDefault(); }
+    else if (e.key === 'Backspace') { press('back'); e.preventDefault(); }
+    else if (e.key === 'Delete' || e.key === 'Escape') { press('clear'); }
+    else if (e.key === 'Enter') { submit(); e.preventDefault(); }
+  });
+
+  /* ----- kết quả ----- */
+  function showResult(kind, o){
+    var res = $('res');
+    res.className = 'res ' + kind;
+    $('icon').textContent = kind === 'bad' ? '!' : (kind === 'warn' ? 'i' : '✓');
+    $('title').textContent = o.title;
+    $('who').textContent = o.name || '';
+    $('unit').textContent = o.unit || '';
+    $('badge').textContent = o.badge || '';
+    $('badge').style.display = o.badge ? '' : 'none';
+    $('note').textContent = o.note || '';
+    $('note').style.display = o.note ? '' : 'none';
+    var t = $('timer'); t.classList.remove('run'); void t.offsetWidth;
+    t.style.animationDuration = o.secs + 's'; t.classList.add('run');
+    $('ov').classList.add('on');
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(closeResult, o.secs * 1000);
+  }
+  function closeResult(){
+    clearTimeout(closeTimer);
+    $('ov').classList.remove('on');
+    digits = ''; busy = false; paint();
+  }
+  $('close').onclick = closeResult;
+  $('ov').addEventListener('click', function(e){ if (e.target === $('ov')) closeResult(); });
+
+  /* ----- gửi điểm danh ----- */
+  function submit(){
+    if (busy || digits.length < MIN) {
+      if (!busy) { var d = $('display'); d.classList.remove('shake'); void d.offsetWidth; d.classList.add('shake'); $('tiny').textContent = 'Số điện thoại cần có ít nhất ' + MIN + ' chữ số.'; }
+      return;
+    }
+    busy = true; $('go').disabled = true; $('go').textContent = 'Đang xử lý...';
+    var ctrl = new AbortController();
+    var to = setTimeout(function(){ ctrl.abort(); }, 40000);
+    fetch('/api/checkin', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({phone: digits}), signal: ctrl.signal
+    }).then(function(r){ return r.json().catch(function(){ return {ok:false, message:'Hệ thống đang bận, vui lòng thử lại.'}; }); })
+    .then(function(r){
+      clearTimeout(to);
+      $('go').textContent = 'ĐIỂM DANH';
+      if (!r.ok) {
+        showResult('bad', {title: r.code === 'closed' ? 'Đã đóng điểm danh' : 'Chưa điểm danh được', badge: '', note: r.message || 'Vui lòng thử lại.', secs: 7});
+      } else if (r.already) {
+        showResult('warn', {title: 'Thầy/cô đã điểm danh rồi', name: r.name, unit: r.unit, badge: 'Lúc ' + r.at, note: '', secs: 6});
+      } else {
+        showResult('ok', {title: 'Điểm danh thành công', name: r.name, unit: r.unit, badge: 'Lúc ' + r.at, note: r.mailNote, secs: 7});
+      }
+    }).catch(function(){
+      clearTimeout(to);
+      $('go').textContent = 'ĐIỂM DANH';
+      showResult('bad', {title: 'Không kết nối được', badge: '', note: 'Vui lòng kiểm tra mạng và thử lại, hoặc liên hệ ban tổ chức.', secs: 7});
+    });
+  }
+  $('go').onclick = submit;
+
+  /* ----- đồng hồ, toàn màn hình, giữ sáng màn hình ----- */
+  function tick(){
+    var d = new Date(), p = function(n){ return (n<10?'0':'')+n; };
+    $('clock').textContent = p(d.getHours())+':'+p(d.getMinutes())+' · '+p(d.getDate())+'/'+p(d.getMonth()+1)+'/'+d.getFullYear();
+  }
+  tick(); setInterval(tick, 15000);
+
+  $('fs').onclick = function(){
+    try {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else document.documentElement.requestFullscreen();
+    } catch(e){}
+  };
+  function keepAwake(){ try { if (navigator.wakeLock) navigator.wakeLock.request('screen').catch(function(){}); } catch(e){} }
+  keepAwake(); document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'visible') keepAwake(); });
+  document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+
+  paint();
+})();
+</script>
+</body>
+</html>
