@@ -213,7 +213,8 @@
       clearTimeout(to);
       $('go').textContent = 'ĐIỂM DANH';
       if (!r.ok) {
-        showResult('bad', {title: r.code === 'closed' ? 'Đã đóng điểm danh' : 'Chưa điểm danh được', badge: '', note: r.message || 'Vui lòng thử lại.', secs: 7});
+        showResult('bad', {title: r.code === 'closed' ? 'Đã đóng điểm danh' : 'Chưa điểm danh được', badge: '',
+          note: (r.message || 'Vui lòng thử lại.') + (r.detail ? ' [Mã lỗi: ' + r.detail + ']' : ''), secs: r.detail ? 20 : 7});
       } else if (r.already) {
         showResult('warn', {title: 'Thầy/cô đã điểm danh rồi', name: r.name, unit: r.unit, badge: 'Lúc ' + r.at, note: '', secs: 6});
       } else {

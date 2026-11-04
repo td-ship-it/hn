@@ -25,18 +25,27 @@ async function callGas(env, payload) {
   if (!env.GAS_URL || !env.GAS_SECRET) {
     return { ok: false, error: 'Chưa cấu hình GAS_URL / GAS_SECRET.' };
   }
-  const res = await fetch(env.GAS_URL, {
-    method: 'POST',
-    // text/plain tránh preflight CORS với Apps Script
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify({ ...payload, secret: env.GAS_SECRET }),
-    redirect: 'follow'
-  });
+  let res;
+  try {
+    res = await fetch(env.GAS_URL, {
+      method: 'POST',
+      // text/plain tránh preflight CORS với Apps Script
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ ...payload, secret: env.GAS_SECRET }),
+      redirect: 'follow'
+    });
+  } catch (e) {
+    return { ok: false, error: 'Không gọi được GAS_URL (' + (e && e.message ? e.message : e) + '). Kiểm tra lại URL.' };
+  }
   const text = await res.text();
   try {
     return JSON.parse(text);
   } catch (e) {
-    return { ok: false, error: 'Máy chủ dữ liệu trả về không hợp lệ (kiểm tra GAS_URL và quyền "Bất kỳ ai").' };
+    return {
+      ok: false,
+      error: 'Apps Script trả về không phải JSON (HTTP ' + res.status + '). Kiểm tra: URL phải kết thúc /exec, ' +
+        'quyền truy cập "Bất kỳ ai", và đã triển khai phiên bản mới sau khi sửa code.'
+    };
   }
 }
 
@@ -52,7 +61,7 @@ async function handleApi(req, env, path) {
   if (path === '/api/checkin') {
     const phone = String(body.phone || '').slice(0, 20);
     const r = await callGas(env, { action: 'checkIn', phone });
-    if (r.error) return json({ ok: false, message: 'Hệ thống đang bận, vui lòng thử lại.' }, 502);
+    if (r.error) return json({ ok: false, message: 'Hệ thống đang bận, vui lòng thử lại.', detail: String(r.error) }, 502);
     return json(r);
   }
 
