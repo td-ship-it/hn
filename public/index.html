@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="robots" content="noindex">
-<title>Hội nghị VC-NLĐ Trường Dược</title>
+<title>Điểm danh Hội nghị VC-NLĐ Trường Dược 2026</title>
 <style>
   :root{
     --bg:#0b3d39; --bg2:#0f5a53; --card:#ffffff; --ink:#10201d; --muted:#5b6f6a; --line:#d5e2de;
@@ -19,7 +19,7 @@
     user-select:none;-webkit-user-select:none;touch-action:manipulation;overflow:hidden;
   }
   button{font:inherit;cursor:pointer;border:0}
-  .app{height:100%;display:grid;grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:0;padding:max(14px,env(safe-area-inset-top)) 16px 16px}
+  .app{height:100vh;height:100dvh;display:grid;grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:0;padding:max(14px,env(safe-area-inset-top)) 16px 16px}
 
   /* khu thông tin */
   .info{color:#fff;text-align:center;padding:6px 8px 10px}
@@ -63,6 +63,31 @@
     .pad{width:min(100%,500px);justify-self:start}
   }
 
+
+  .t-short{display:none}
+
+  /* điện thoại / màn hình nhỏ: gọn lại để vừa 1 màn hình, không cần cuộn */
+  @media (max-width:899px){
+    .app{padding:max(8px,env(safe-area-inset-top)) 12px max(10px,env(safe-area-inset-bottom));grid-template-rows:auto 1fr}
+    .info{padding:2px 4px 8px}
+    .badge{font-size:11px}
+    h1{font-size:19px;margin:2px 0 2px}
+    .t-full{display:none} .t-short{display:inline}
+    .hint{font-size:13px}
+    .clock{display:none}
+    .pad{align-self:start;width:100%;max-width:440px;padding:12px;border-radius:20px}
+    .display{min-height:clamp(52px,8.4dvh,72px);font-size:clamp(26px,8vw,38px);border-radius:14px}
+    .keys{gap:8px;margin-top:10px}
+    .key{height:clamp(46px,10.4dvh,82px);font-size:clamp(26px,7.6vw,34px);border-radius:14px}
+    .key.fn{font-size:clamp(14px,4vw,17px)}
+    .go{margin-top:10px;height:clamp(52px,9.4dvh,74px);font-size:clamp(18px,5vw,22px);border-radius:14px}
+    .tiny{margin:6px 0 0;min-height:0}
+    .res{padding:26px 18px 22px;border-radius:22px}
+    .icon{width:72px;height:72px;font-size:42px;margin-bottom:10px}
+  }
+  @media (max-width:899px) and (max-height:640px){ .hint{display:none} }
+  @media (max-width:699px){ .corner{display:none!important} }
+
   /* kết quả */
   .ov{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(5,25,23,.78);z-index:10}
   .ov.on{display:flex}
@@ -95,8 +120,8 @@
 <body>
 <div class="app">
   <section class="info">
-    <span class="badge">ĐIỂM DANH THAM DỰ</span>
-    <h1>Hội nghị VC-NLĐ Trường Dược</h1>
+    <span class="badge">Điểm danh tham dự</span>
+    <h1><span class="t-full">Hội nghị Viên chức - Người lao động<br>Trường Dược năm 2026</span><span class="t-short">Hội nghị VC-NLĐ Trường Dược 2026</span></h1>
     <p class="hint">Thầy/cô vui lòng nhập số điện thoại đã đăng ký để điểm danh</p>
     <div class="clock" id="clock"></div>
   </section>
